@@ -78,6 +78,22 @@
       text-decoration: none;
     }
 
+    /* 경고 박스 */
+    .warning-box {
+      border: 2px solid #e74c3c;
+      background-color: #fdf2f2;
+      padding: 10px 12px;
+      margin-bottom: 15px;
+      border-radius: 4px;
+      font-size: 12.5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .warning-box span.icon {
+      font-size: 22px;
+    }
+
     /* 프로필 인포박스 */
     .infobox {
       width: 100%;
@@ -131,7 +147,7 @@
       vertical-align: middle;
     }
 
-    /* 나무위키 목차 (TOC) */
+    /* 나무위키 목차 */
     .toc {
       background-color: var(--namu-toc-bg);
       border: 1px solid #ccc;
@@ -165,7 +181,7 @@
       text-decoration: underline;
     }
 
-    /* 목차 헤더 & 텍스트 */
+    /* 목차 헤더 */
     h2 {
       font-size: 17px;
       font-weight: bold;
@@ -247,10 +263,18 @@
     <!-- 본문 제목 -->
     <div class="doc-title">여은혁</div>
 
+    <!-- 문서 경고 배너 -->
+    <div class="warning-box">
+      <span class="icon">🚨</span>
+      <div>
+        <strong>[임시조치 안내]</strong> 본 문서의 당사자(여은혁)로부터 <strong>"전부 날조니 당장 문서를 내려달라"</strong>는 삭제 요청이 접수되었으나, 다른 한편으로는 <strong>"인스타에 올려서 나 좀 띄워줘라"</strong>는 은밀한 부탁이 확인되어 <strong>반려</strong>되었습니다.
+      </div>
+    </div>
+
     <!-- 분류 태그 -->
     <div class="category-box">
       <div>
-        <strong>분류:</strong> <a href="#" class="wiki-link">1998년 출생</a> | <a href="#" class="wiki-link">드래곤족</a> | <a href="#" class="wiki-link">시흥시 출신 인물</a> | <a href="#" class="wiki-link">친중 논란</a> | <a href="#" class="wiki-link">롤 버스 탑승자</a>
+        <strong>분류:</strong> <a href="#" class="wiki-link">1998년 출생</a> | <a href="#" class="wiki-link">드래곤족</a> | <a href="#" class="wiki-link">시흥시 출신 인물</a> | <a href="#" class="wiki-link">숨은 관종</a> | <a href="#" class="wiki-link">친중 논란</a> | <a href="#" class="wiki-link">롤 버스 탑승자</a>
       </div>
       <div style="color: #888;">더 보기</div>
     </div>
@@ -286,15 +310,15 @@
       </tr>
       <tr>
         <th>주요 서식지</th>
-        <td>침대 위, 노래방 1번 방, 중드 시청 구역</td>
+        <td>침대 위, 노래방 1번 방, 인스타 릴스 추천 탭</td>
       </tr>
       <tr>
         <th>MBTI</th>
-        <td><a href="#" class="wiki-link">ISFJ</a> <span class="del">(본인은 냉혈한 T라고 우김)</span></td>
+        <td><a href="#" class="wiki-link">ISFJ</a> <span class="del">(본인은 차가운 인플루언서상이라고 주장)</span></td>
       </tr>
     </table>
 
-    <!-- 나무위키 목차 (TOC) -->
+    <!-- 나무위키 목차 -->
     <div class="toc">
       <div class="toc-title">목차</div>
       <ol>
@@ -307,6 +331,7 @@
             <li><a href="#s-4-2">4.2. 모바일 게임 120만 원 탕진 사건</a></li>
             <li><a href="#s-4-3">4.3. 드래곤빌리지3 'ㄱㄴ(가능)' 닉네임 논란</a></li>
             <li><a href="#s-4-4">4.4. 과도한 중드 결제 및 친중 의혹 논란</a></li>
+            <li><a href="#s-4-5">4.5. "내려달라" 읍소 뒤 인스타 홍보 독려 (샤이 관종 논란)</a></li>
           </ol>
         </li>
         <li><a href="#s-5">5. 어록</a></li>
@@ -317,7 +342,7 @@
     <!-- 1. 개요 -->
     <h2 id="s-1"><span>1. 개요</span> <span class="edit-btn">[편집]</span></h2>
     <p>대한민국의 인물이자 시흥시에 은신 중인 <strong>고위 드래곤족</strong>. 평소에는 마나 소모를 줄이기 위해 평범한 인간 청년의 모습으로 폴리모프하여 살아가고 있다. <span class="del">주요 활동 반경은 침대 반경 2미터를 벗어나지 않는다.</span></p>
-    <p>엄청난 뻔뻔함과 억지 논리로 무장하여 지인들의 멘탈을 갉아먹는 능력이 탁월하다.</p>
+    <p>겉으로는 무관심하고 차분한 척 행동하나, 마음속 깊은 곳에는 <strong>'알고리즘의 간택을 받아 대스타가 되고 싶다'</strong>는 야망을 품고 있는 전형적인 음지 관종이다.</p>
 
     <!-- 2. 신체적 특징 -->
     <h2 id="s-2"><span>2. 신체적 특징</span> <span class="edit-btn">[편집]</span></h2>
@@ -347,9 +372,14 @@
     <p>최근 각종 OTT 플랫폼에서 <strong>중국 드라마(중드)</strong>에 과도하게 심취하여 유료 결제를 남발하는 정황이 포착되었다. 통장 잔고가 바닥을 드러내는 와중에도 중드 VIP 멤버십과 VOD 결제는 절대 끊지 않는 기행을 보여 지인들의 공분을 샀다.</p>
     <p>이에 주변에서는 "게임에 120만 원을 꼴아박더니 이제는 대륙의 자본에 영혼까지 팔아넘긴 것이 아니냐", "사실 서양 드래곤이 아니라 <strong>중국의 동양 '용(龍)' 출신</strong>이라 조국을 그리워하는 것이다"라는 등 <strong>친중(親中) 행보 논란</strong>이 거세게 일고 있다.<a href="#fn4" class="footnote">[4]</a></p>
 
+    <h3 id="s-4-5" style="font-size: 15px; margin: 12px 0 6px;">4.5. "내려달라" 읍소 뒤 인스타 홍보 독려 (샤이 관종 논란)</h3>
+    <p>본 문서가 등재된 직후에는 "이거 다 날조니 당장 글을 내려라", "단톡방에서 당장 지우라"며 극도로 억울해하며 난동을 피웠다. 그러나 정작 다른 친구들이 <strong>"이거 인스타 스토리나 릴스에 올려서 퍼뜨려도 되냐?"</strong>고 묻자 <strong>"어? 어... 뭐 올려도 되긴 하는데..."</strong>라며 흔쾌히 승낙하는 이중적인 행보를 보여 큰 웃음을 주었다.</p>
+    <p>지인들은 "겉으로는 화난 척하지만 <strong>속으로는 내심 인스타 떡상을 노리고 인플루언서가 되고 싶어 안달이 난 게 확실하다</strong>"고 입을 모아 증언하고 있다.<a href="#fn5" class="footnote">[5]</a></p>
+
     <!-- 5. 어록 -->
     <h2 id="s-5"><span>5. 어록</span> <span class="edit-btn">[편집]</span></h2>
     <div class="quote-box">
+      "아 진짜 내려달라고! 근데... 인스타 올릴 땐 나 태그해라." <span class="del">(숨길 수 없는 관종 본능)</span><br>
       "더 세지고 싶은 자극"<br>
       "오벡스랑 폭풍벡스"<br>
       "드래곤도 암컷이 있다" <span class="del">(ㄱㄴ 사건의 가장 강력한 증거)</span><br>
@@ -366,7 +396,8 @@
     <ul>
       <li>자타공인 <strong>노래방 고음충</strong>이다. 상대방을 고려하지 않은 채 하현우의 〈Don't Cry〉나 엠씨더맥스의 곡들을 난사한다. 3옥타브 클라이맥스에 도달하면 돌고래 비명 소리를 내며 방 안의 모든 사람을 청각장애의 위기에 빠뜨린다.</li>
       <li>MBTI가 ISFJ로 알려져 있으나 본인은 지성적이고 차가운 T(사고형)라고 우긴다. 하지만 게임에서 지거나 친구들이 조금만 팩트로 공격하면 눈시울이 붉어지는 편이다.</li>
-      <li>당일 밤 11시에 배달 어플을 켜서 야식을 시켜 먹는 전형적인 <strong>'도파민 충'</strong>다.</li>
+      <li>당일 밤 11시에 배달 어플을 켜서 야식을 시켜 먹는 전형적인 <strong>'도파민 충'</strong>이다.</li>
+      <li>지인들이 만들어준 다른 위키 문서들을 보며 부러워하다가 막상 본인 문서가 생기자 하루에 50번씩 본인 이름을 검색해 보고 있다는 흉흉한 소문이 있다.</li>
     </ul>
 
     <!-- 각주 영역 -->
@@ -375,6 +406,7 @@
       <p id="fn2">[2] 당시 함께 게임했던 지인은 "거의 시체를 끌고 산을 넘는 기분이었다"고 증언했다.</p>
       <p id="fn3">[3] 지인들의 증언에 따르면, 당시 그의 드래곤 육성 방식과 애정표현은 어딘가 심하게 뒤틀려 있었다고 한다.</p>
       <p id="fn4">[4] 본인은 "단지 스토리와 연출이 흥미진진해서 결제했을 뿐"이라며 황급히 해명 중이다.</p>
+      <p id="fn5">[5] 본 문서가 퍼져서 인스타 팔로워가 늘어나면 슬그머니 프로필 링크에 이 위키 주소를 걸어둘 가능성이 99.9%다.</p>
     </div>
   </div>
 
