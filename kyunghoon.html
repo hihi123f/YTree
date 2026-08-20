@@ -6,401 +6,490 @@
   <title>경훈냥이 - 나무위키</title>
   <style>
     :root {
-      --namu-green: #008275;
-      --namu-border: #cccccc;
-      --namu-link: #0275d8;
-      --namu-toc-bg: #f9f9f9;
+      --namu-green: #00A495;
+      --namu-dark: #1E293B;
+      --namu-bg: #F8F9FA;
+      --namu-border: #E2E8F0;
+      --namu-link: #0275D8;
+      --namu-text: #333333;
     }
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
       scroll-behavior: smooth;
     }
     body {
       background-color: #ffffff;
-      color: #373a3c;
+      color: var(--namu-text);
       line-height: 1.6;
+      font-size: 14px;
+    }
+    a {
+      text-decoration: none;
+      color: var(--namu-link);
+    }
+    a:hover {
+      text-decoration: underline;
     }
 
-    /* 상단 내비바 */
-    .header {
+    /* 상단 내비바 (실제 모바일 뷰) */
+    .top-nav {
       background-color: var(--namu-green);
       color: white;
-      padding: 10px 14px;
+      height: 48px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 0 16px;
       position: sticky;
       top: 0;
       z-index: 100;
     }
-    .header .title {
+    .top-nav .logo {
+      font-weight: 800;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .top-nav .icons {
+      font-size: 18px;
+      display: flex;
+      gap: 16px;
+    }
+    
+    /* 검색바 */
+    .search-container {
+      background-color: #f1f1f1;
+      padding: 8px 16px;
+      border-bottom: 1px solid #ddd;
+    }
+    .search-box {
+      background-color: white;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      padding: 6px 12px;
+      color: #888;
+      font-size: 14px;
+    }
+    .search-box span { margin-right: 8px; }
+
+    /* 본문 컨테이너 */
+    .container {
+      padding: 16px;
+    }
+
+    /* 문서 제목 & 최근 수정 시각 */
+    .doc-title {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 4px;
+      color: #000;
+    }
+    .edit-time {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 12px;
+    }
+
+    /* 액션 버튼 (별, 편집, 토론 등) */
+    .action-buttons {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 16px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+    .action-buttons button {
+      background-color: white;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 6px 10px;
+      font-size: 13px;
+      color: #333;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* 분류 박스 */
+    .category-box {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 10px;
+      font-size: 13px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .category-box .cat-content {
+      line-height: 1.8;
+    }
+    .category-box .more-btn {
+      border: 1px solid #ccc;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      color: #666;
+      background: #f9f9f9;
+      white-space: nowrap;
+      margin-left: 10px;
+    }
+
+    /* 인포박스 (프로필 표 - 실제 나무위키 스타일) */
+    .infobox {
+      width: 100%;
+      border: 1px solid var(--namu-border);
+      border-collapse: collapse;
+      margin-bottom: 24px;
+      font-size: 13px;
+    }
+    .infobox th, .infobox td {
+      border: 1px solid var(--namu-border);
+    }
+    .infobox-top-header {
+      background-color: var(--namu-green);
+      color: white;
+      text-align: center;
+      padding: 10px;
       font-size: 16px;
       font-weight: bold;
     }
-    .search-bar {
-      display: flex;
-      align-items: center;
-      background: white;
-      border-radius: 4px;
-      padding: 6px 10px;
-      margin: 8px 12px;
-      border: 1px solid #ddd;
-      font-size: 13px;
-      color: #888;
-    }
-
-    /* 본문 레이아웃 */
-    .container {
-      padding: 10px 14px 40px;
-    }
-    .doc-title {
-      font-size: 26px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      border-bottom: 2px solid #ccc;
-      padding-bottom: 4px;
-    }
-    .category-box {
-      font-size: 12px;
-      background-color: #fafafa;
-      border: 1px solid #e0e0e0;
-      border-radius: 4px;
-      padding: 6px 10px;
-      margin-bottom: 15px;
-      display: flex;
-      justify-content: space-between;
-    }
-    .category-box a {
-      color: var(--namu-link);
-      text-decoration: none;
-    }
-
-    /* 프로필 인포박스 */
-    .infobox {
-      width: 100%;
-      border-collapse: collapse;
-      border: 2px solid var(--namu-green);
-      margin-bottom: 20px;
-      font-size: 13.5px;
-    }
-    .infobox-title {
-      background-color: var(--namu-green);
+    .infobox-sub-header {
+      background-color: var(--namu-dark);
       color: white;
       text-align: center;
       padding: 8px;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: bold;
     }
-    .infobox-title span {
+    .infobox-sub-header span {
       display: block;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: normal;
-      color: #d1f2eb;
+      color: #ccc;
+      margin-top: 2px;
     }
-    .infobox-img-container {
+    .infobox-img {
       text-align: center;
-      background: #fafafa;
-      border-bottom: 1px solid var(--namu-border);
-      padding: 10px;
+      padding: 0;
+      background: white;
     }
-    .infobox-img-container img {
+    .infobox-img img {
+      width: 100%;
       max-width: 100%;
       height: auto;
-      max-height: 420px;
       display: block;
-      margin: 0 auto;
-      object-fit: cover;
     }
-    .infobox th {
+    .infobox-label {
       background-color: var(--namu-green);
       color: white;
-      width: 28%;
-      padding: 7px 8px;
-      text-align: center;
-      vertical-align: middle;
       font-weight: bold;
-      border: 1px solid var(--namu-border);
+      text-align: center;
+      width: 25%;
+      padding: 8px;
     }
-    .infobox td {
-      background-color: #ffffff;
-      padding: 7px 10px;
-      border: 1px solid var(--namu-border);
-      vertical-align: middle;
+    .infobox-value {
+      background-color: white;
+      padding: 8px 12px;
     }
 
-    /* 나무위키 목차 */
+    /* 목차 (TOC) */
     .toc {
-      background-color: var(--namu-toc-bg);
       border: 1px solid #ccc;
-      padding: 10px 14px;
-      margin: 15px 0 25px 0;
+      background-color: #FAFAFA;
       border-radius: 4px;
+      margin-bottom: 24px;
       display: inline-block;
-      min-width: 220px;
+      min-width: 100%;
     }
-    .toc-title {
+    .toc-header {
+      padding: 10px 14px;
+      border-bottom: 1px solid #ccc;
       font-weight: bold;
-      font-size: 14px;
-      text-align: center;
-      margin-bottom: 6px;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 4px;
+      font-size: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .toc-body {
+      padding: 12px 14px;
     }
     .toc ol {
       list-style-type: none;
       padding-left: 0;
-      font-size: 13px;
     }
-    .toc ol li {
-      margin-bottom: 4px;
+    .toc ol ol {
+      padding-left: 18px;
     }
-    .toc ol li a {
-      color: var(--namu-link);
-      text-decoration: none;
-    }
-    .toc ol li a:hover {
-      text-decoration: underline;
+    .toc li {
+      margin-bottom: 6px;
     }
 
-    /* 목차 헤더 */
+    /* 본문 텍스트 및 문단 제목 */
     h2 {
-      font-size: 17px;
+      font-size: 20px;
       font-weight: bold;
       color: #000;
-      margin-top: 28px;
-      margin-bottom: 8px;
+      margin-top: 32px;
+      margin-bottom: 12px;
       border-bottom: 1px solid #ccc;
-      padding-bottom: 4px;
+      padding-bottom: 6px;
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-end;
+    }
+    h3 {
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 20px;
+      margin-bottom: 8px;
     }
     h2 span.edit-btn {
-      font-size: 11px;
-      color: var(--namu-link);
+      font-size: 12px;
+      color: #666;
       font-weight: normal;
     }
     p {
-      font-size: 13.5px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       word-break: keep-all;
     }
     ul {
-      margin-left: 18px;
-      margin-bottom: 12px;
+      margin-left: 20px;
+      margin-bottom: 16px;
     }
     li {
-      font-size: 13.5px;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       word-break: keep-all;
     }
 
-    /* 위키 스타일 */
+    /* 취소선 및 각주 */
     .del {
       text-decoration: line-through;
-      color: #888888;
-    }
-    a.wiki-link {
-      color: var(--namu-link);
-      text-decoration: none;
+      color: #999;
     }
     .footnote {
       font-size: 11px;
       vertical-align: super;
       color: var(--namu-link);
-      text-decoration: none;
-      font-weight: bold;
+      cursor: pointer;
     }
     .footnote-list {
-      margin-top: 30px;
-      border-top: 1px dashed #ccc;
-      padding-top: 10px;
+      margin-top: 40px;
+      border-top: 1px solid #ccc;
+      padding-top: 12px;
       font-size: 12px;
-      color: #666;
+      color: #555;
     }
     .quote-box {
       border-left: 4px solid var(--namu-green);
-      background-color: #f8f9fa;
+      background-color: var(--namu-bg);
       padding: 12px 16px;
-      margin: 10px 0;
-      font-size: 14px;
+      margin: 16px 0;
       font-style: italic;
-      line-height: 1.8;
     }
   </style>
 </head>
 <body>
 
-  <div class="header">
-    <div class="title">나무위키</div>
-    <div style="font-size: 13px;">최근변경 | 토론</div>
+  <!-- 상단 내비바 -->
+  <div class="top-nav">
+    <div class="logo">
+      🌿 나무위키
+    </div>
+    <div class="icons">
+      🕒 💬 🎁 👤
+    </div>
   </div>
 
-  <div class="search-bar">
-    🔍 여기서 검색
+  <!-- 검색바 -->
+  <div class="search-container">
+    <div class="search-box">
+      <span>🔍</span> 여기에서 검색
+    </div>
   </div>
 
   <div class="container">
-    <!-- 본문 제목 -->
+    <!-- 문서 제목 -->
     <div class="doc-title">경훈냥이</div>
+    <div class="edit-time">최근 수정 시각: 2026-08-20 22:58:14</div>
+
+    <!-- 액션 버튼 -->
+    <div class="action-buttons">
+      <button>⭐ 65</button>
+      <button>📝 편집 요청</button>
+      <button>💬 토론</button>
+      <button>📜 역사</button>
+      <button>⋮</button>
+    </div>
 
     <!-- 분류 태그 -->
     <div class="category-box">
-      <div>
-        <strong>분류:</strong> <a href="#" class="wiki-link">1999년 출생(호소)</a> | <a href="#" class="wiki-link">남성 단백질 흡혈귀</a> | <a href="#" class="wiki-link">패션 헬창</a> | <a href="#" class="wiki-link">메이드 카페 종사자</a> | <a href="#" class="wiki-link">회색 바지 금지령</a> | <a href="#" class="wiki-link">탈주닌자</a> | <a href="#" class="wiki-link">황금 고블린</a>
+      <div class="cat-content">
+        <strong>분류:</strong> 
+        <a href="#">1999년 출생(호소)</a> | 
+        <a href="#">단백질 절도범</a> | 
+        <a href="#">패션 헬창</a> | 
+        <a href="#">빠른 99년생 호소인</a> | 
+        <a href="#">메이드 카페 종사자</a> | 
+        <a href="#">회색 바지 금지령</a>
       </div>
-      <div style="color: #888;">더 보기</div>
+      <div class="more-btn">더 보기</div>
     </div>
 
-    <!-- 프로필 테이블 -->
+    <!-- 프로필 인포박스 -->
     <table class="infobox">
       <tr>
-        <th colspan="2" class="infobox-title">
-          경훈냥이
-          <span>Kyunghoon the Cat (Gyeonghoon-nyang)</span>
-        </th>
+        <td colspan="2" class="infobox-top-header">
+          메이드 카페 2026 시즌 스태프
+        </td>
       </tr>
       <tr>
-        <td colspan="2" class="infobox-img-container">
+        <td colspan="2" style="background:#333; color:white; text-align:center; font-size:11px; padding:4px;">
+          [ 펼치기 · 접기 ]
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" class="infobox-img">
           <img src="KakaoTalk_20260820_211214137.png" alt="경훈냥이 프로필 사진">
         </td>
       </tr>
       <tr>
-        <th>출생</th>
-        <td>1999년 1~2월 추정 <span class="del">(와꾸는 98년생)</span><br><a href="#" class="wiki-link">시드니(추정)</a> 혹은 대한민국</td>
+        <td colspan="2" style="background:var(--namu-green); color:white; text-align:center; font-weight:bold; padding:6px; font-size: 14px;">
+          단백질 루팡 No.1
+        </td>
       </tr>
       <tr>
-        <th>국적</th>
-        <td>🇦🇺 호주 <span class="del">(한국어 구사력이 영단어보다 떨어짐)</span></td>
+        <td colspan="2" class="infobox-sub-header">
+          경훈냥이
+          <span>Kyunghoon the Cat</span>
+        </td>
       </tr>
       <tr>
-        <th>신체 특징</th>
-        <td>회색 트레이닝 바지 착용 불가<a href="#fn1" class="footnote">[1]</a>, 훔친 단백질로 연명 중인 근육</td>
+        <td class="infobox-label">출생</td>
+        <td class="infobox-value">1999년 1~2월 추정 <span class="del">(와꾸는 98년생)</span><br><a href="#">시드니(추정)</a> 혹은 대한민국</td>
       </tr>
       <tr>
-        <th>직업</th>
-        <td><a href="#" class="wiki-link">메이드 카페</a> 서빙 및 응대 스태프</td>
+        <td class="infobox-label">국적</td>
+        <td class="infobox-value">🇦🇺 대한민국 <span class="del">(한국어보다 영어가 유창함)</span></td>
       </tr>
       <tr>
-        <th>주요 인간관계</th>
-        <td><a href="index.html" class="wiki-link">여은혁</a> (10년 지기 악우이자 단백질 최대 피해자)</td>
+        <td class="infobox-label">신체</td>
+        <td class="infobox-value">회색 트레이닝 바지 착용 불가<a href="#fn1" class="footnote">[1]</a>, 훔친 단백질로 연명 중인 근육</td>
       </tr>
       <tr>
-        <th>별명</th>
-        <td>단백질 괴도 루팡, 패션 헬창, 빠른99 호소인, 워터파크, 롤 탈주닌자, 움직이는 술자판기</td>
+        <td class="infobox-label">직업</td>
+        <td class="infobox-value"><a href="#">메이드 카페</a> 서빙 및 응대 스태프</td>
       </tr>
       <tr>
-        <th>특기/스킬</th>
-        <td>오운완 피드 도배, 남자 단백질 긴빠이, 실시간 지리기, 캐리어 술 압축 보관</td>
+        <td class="infobox-label">주요 관계</td>
+        <td class="infobox-value"><a href="index.html">여은혁</a> (10년 지기 악우이자 단백질 최대 피해자)</td>
+      </tr>
+      <tr>
+        <td class="infobox-label">별명</td>
+        <td class="infobox-value">단백질 괴도 루팡, 패션 헬창, 롤 탈주닌자, 황금 고블린, 워터파크</td>
       </tr>
     </table>
 
-    <!-- 나무위키 목차 -->
+    <!-- 목차 -->
     <div class="toc">
-      <div class="toc-title">목차</div>
-      <ol>
-        <li><a href="#s-1">1. 개요</a></li>
-        <li><a href="#s-2">2. 직업 및 활동</a></li>
-        <li><a href="#s-3">3. 인간관계 (vs 여은혁)</a></li>
-        <li><a href="#s-4">4. 사건 사고 및 논란</a>
-          <ol style="padding-left: 14px;">
-            <li><a href="#s-4-1">4.1. 98년생 비주얼의 '빠른 99' 족보 파괴 및 예의 논란</a></li>
-            <li><a href="#s-4-2">4.2. 인스타 '오운완' 집착 및 남성 단백질 연쇄 착취 사건</a></li>
-            <li><a href="#s-4-3">4.3. 상습 배뇨 및 회색 바지 기피(요실금) 의혹</a></li>
-            <li><a href="#s-4-4">4.4. 롤 1대1 굴욕패 및 영구 잠적(탈주닌자) 사건</a></li>
-            <li><a href="#s-4-5">4.5. '술 빨자' 아가리 주폭 및 여성 감응형 음주 논란</a></li>
-            <li><a href="#s-4-6">4.6. 여행지 인간 술자판기(황금 고블린) 사건</a></li>
-            <li><a href="#s-4-7">4.7. 불순한 기타 연주 및 최종 목적 달성 논란</a></li>
-          </ol>
-        </li>
-        <li><a href="#s-5">5. 유행어 및 어록</a></li>
-        <li><a href="#s-6">6. 여담</a></li>
-      </ol>
+      <div class="toc-header">
+        <span>목차</span>
+        <span style="color:#888;">📋</span>
+      </div>
+      <div class="toc-body">
+        <ol>
+          <li><a href="#s-1">1. 개요</a></li>
+          <li><a href="#s-2">2. 직업 및 활동</a></li>
+          <li><a href="#s-3">3. 인간관계 (vs 여은혁)</a></li>
+          <li><a href="#s-4">4. 사건 사고 및 논란</a>
+            <ol>
+              <li><a href="#s-4-1">4.1. 98년생 비주얼의 '빠른 99' 족보 파괴 논란</a></li>
+              <li><a href="#s-4-2">4.2. 인스타 '오운완' 집착 및 남성 단백질 연쇄 착취 사건</a></li>
+              <li><a href="#s-4-3">4.3. 상습 배뇨 및 회색 바지 기피 의혹</a></li>
+              <li><a href="#s-4-4">4.4. 롤 1대1 굴욕패 및 영구 잠적 사건</a></li>
+              <li><a href="#s-4-5">4.5. '술 빨자' 아가리 주폭 및 여성 감응형 음주 논란</a></li>
+              <li><a href="#s-4-6">4.6. 여행지 인간 술자판기(황금 고블린) 사건</a></li>
+              <li><a href="#s-4-7">4.7. 불순한 기타 연주 및 목적 달성 논란</a></li>
+            </ol>
+          </li>
+          <li><a href="#s-5">5. 유행어 및 어록</a></li>
+          <li><a href="#s-6">6. 여담</a></li>
+        </ol>
+      </div>
     </div>
 
     <!-- 1. 개요 -->
     <h2 id="s-1"><span>1. 개요</span> <span class="edit-btn">[편집]</span></h2>
-    <p>대한민국의 인물이자 자칭 <strong>메이드 카페의 아이돌</strong>. 액면가는 빼도 박도 못하는 1998년생이지만 본인은 죽어도 <strong>'빠른 99년생'</strong>이라 주장하며 족보를 어지럽히는 족보 브레이커다.</p>
-    <p>최근에는 헬스에 심취하여 인스타그램에 운동 인증샷을 도배하고 있으나, 과거 메이드 카페 시절부터 주변 지인(주로 남성)들의 '단백질'을 상습적으로 착취해왔던 어두운 과거가 폭로되면서 <strong>'단백질 괴도 루팡'</strong>이라는 흉흉한 악명을 떨치고 있다.</p>
+    <p>대한민국의 인물이자 자칭 <strong>메이드 카페의 헬스돌</strong>. 액면가는 빼도 박도 못하는 1998년생이지만 본인은 죽어도 <strong>'빠른 99년생'</strong>이라 주장하며 족보를 어지럽히는 족보 브레이커다.</p>
+    <p>최근에는 헬스에 심취하여 인스타그램에 운동 인증샷을 도배하고 있으나, 과거 메이드 카페 시절부터 주변 남성 지인들의 '단백질'을 상습적으로 착취해왔던 어두운 과거가 폭로되면서 <strong>'단백질 괴도 루팡'</strong>이라는 악명을 떨치고 있다.</p>
 
     <!-- 2. 직업 및 활동 -->
     <h2 id="s-2"><span>2. 직업 및 활동</span> <span class="edit-btn">[편집]</span></h2>
-    <p>놀랍게도 현직 <strong>메이드 카페 직원</strong>이다. 본인은 전문적인 서비스 마인드를 갖추고 서빙한다고 주장하나, 손님이 오면 특유의 어눌한 한국어와 버터 발음의 영어로 "오이시쿠나레~"를 외치는 모습이 지인들에게 여러 차례 목격되었다.</p>
+    <p>놀랍게도 현직 <strong>메이드 카페 직원</strong>이다. 손님 앞에서는 유창한 버터 발음으로 "오이시쿠나레~"를 외치며 오므라이스에 케첩을 뿌리지만, 뒤에서는 남의 단백질 쉐이크를 흡입하며 근육을 키우는 이중생활을 이어가고 있다.</p>
 
     <!-- 3. 인간관계 -->
     <h2 id="s-3"><span>3. 인간관계 (vs 여은혁)</span> <span class="edit-btn">[편집]</span></h2>
-    <p><a href="index.html" class="wiki-link"><strong>여은혁</strong></a>과는 10년이 넘는 세월 동안 기행을 주고받은 영혼의 단짝이자 악우 관계이다.</p>
-    <p>알려진 바에 따르면 두 사람이 급격하게 친해진 결정적인 계기는 <a href="index.html" class="wiki-link">여은혁</a>이 경훈냥이가 근무하는 <strong>메이드 카페의 '핵심 VIP 단골손님'</strong>으로 출석 도장을 찍으면서부터라고 전해진다.<a href="#fn2" class="footnote">[2]</a></p>
-    <p>당사자들은 "그냥 비즈니스 관계일 뿐"이라며 한사코 부인하고 있으나, <strong>메이드 카페 안에서 둘이 나란히 고양이 귀 머리띠를 착용하고 다정하게 브이(V)를 그리며 찍은 스티커 사진</strong>이 지인 단톡방에 유출되면서 사실상 빼도 박도 못하는 결정적 증거(물증)로 박제되었다.<a href="#fn3" class="footnote">[3]</a></p>
+    <p><a href="index.html"><strong>여은혁</strong></a>과는 10년이 넘는 세월 동안 기행을 주고받은 영혼의 악우이다.</p>
+    <p><a href="index.html">여은혁</a>이 그가 일하는 <strong>메이드 카페의 'VIP 단골손님'</strong>으로 출석 도장을 찍으며 급격히 친해졌다. 둘이 고양이 귀를 쓰고 찍은 스티커 사진은 이미 지인들의 카톡방 공공재가 되었다. 또한 여은혁은 경훈냥이 단백질 절도 행각의 최대 피해자로, 닭가슴살을 살 때마다 삥을 뜯기고 있다.<a href="#fn2" class="footnote">[2]</a></p>
 
     <!-- 4. 사건 사고 및 논란 -->
     <h2 id="s-4"><span>4. 사건 사고 및 논란</span> <span class="edit-btn">[편집]</span></h2>
     
-    <h3 id="s-4-1" style="font-size: 15px; margin: 12px 0 6px;">4.1. 98년생 비주얼의 '빠른 99' 족보 파괴 및 예의 논란</h3>
-    <p>누가 봐도 98년생, 심하면 그 이상으로 보이는 노안 비주얼을 가졌음에도 불구하고 본인은 <strong>"나 빠른 99야"</strong>라며 억지 주장을 펼치고 있다. 정작 98년생 친구들에게는 꼬박꼬박 말을 놓으며 맞먹으려 드는 하극상을 보여주어 주변의 공분을 샀다.</p>
-    <p>친구들은 "얼마나 빠르길래 유세를 떠냐", <strong>"도대체 얼마나 빠른지 트랙에서 48시간 동안 쉬지 않고 달리기 시켜보고 싶다"</strong>며 분통을 터뜨리고 있다.<a href="#fn4" class="footnote">[4]</a></p>
+    <h3 id="s-4-1">4.1. 98년생 비주얼의 '빠른 99' 족보 파괴 및 예의 논란</h3>
+    <p>누가 봐도 98년생, 심하면 그 이상으로 보이는 비주얼을 가졌음에도 불구하고 본인은 <strong>"나 빠른 99야"</strong>라며 억지 주장을 펼치고 있다. 정작 98년생 친구들에게는 꼬박꼬박 반말을 하는 하극상을 보여, 친구들은 <strong>"도대체 얼마나 빠른지 트랙에서 48시간 동안 쉬지 않고 달리기 시켜보고 싶다"</strong>며 분통을 터뜨리고 있다.<a href="#fn3" class="footnote">[3]</a></p>
 
-    <h3 id="s-4-2" style="font-size: 15px; margin: 12px 0 6px;">4.2. 인스타 '오운완' 집착 및 남성 단백질 연쇄 착취 사건</h3>
-    <p>최근 운동을 시작하더니 인스타그램 스토리에 <strong>'#오운완', 거울 셀카, 헬스장 태그</strong>를 도배하며 본격적인 헬창 코스프레에 돌입했다. 그러나 그 화려한 피드 뒤에는 <strong>주변 남성 지인들의 '단백질'을 쫙 빼먹고 도망가던 추악한 과거</strong>가 숨겨져 있다.</p>
-    <p>과거 메이드 카페 근무 시절부터 동료 스태프나 지인 남자들의 단백질(보충제)을 몰래 하도 훔쳐 먹은 탓에, 피해를 입은 남성들은 하나같이 <strong>"경훈이만 만나고 오면 온몸에 힘이 다 빠져서 다리가 풀린다", "내 단백질을 다 빨아먹고 도망갔다"</strong>며 극심한 체력 저하와 현기증을 호소하고 있다. 지인들은 현재 인스타에 올라오는 저 근육이 남성들의 순결한(?) 단백질을 착취하여 만들어진 불경한 덩어리라며 경악하는 중이다.<a href="#fn5" class="footnote">[5]</a></p>
+    <h3 id="s-4-2">4.2. 인스타 '오운완' 집착 및 남성 단백질 연쇄 착취 사건</h3>
+    <p>인스타그램 스토리에 <strong>'#오운완', 거울 셀카</strong>를 도배 중이나, 그 화려한 근육 뒤에는 <strong>주변 남성 지인들의 '단백질'을 쫙 빼먹고 도망가던 추악한 과거</strong>가 숨겨져 있다.</p>
+    <p>동료 스태프나 남자 지인들의 보충제를 상습적으로 훔쳐 먹은 탓에, 피해 남성들은 하나같이 <strong>"경훈이만 만나고 오면 온몸에 힘이 다 빠져서 다리가 풀린다", "내 단백질을 다 빨아먹고 도망갔다"</strong>며 극심한 체력 저하를 호소하고 있다.<a href="#fn4" class="footnote">[4]</a></p>
 
-    <h3 id="s-4-3" style="font-size: 15px; margin: 12px 0 6px;">4.3. 상습 배뇨 및 회색 바지 기피(요실금) 의혹</h3>
-    <p>평소 입버릇처럼 <strong>"지린다"</strong>는 말을 달고 살더니, 실제로도 통제력을 상실하고 자주 지리는 것이 아니냐는 충격적인 의혹이 제기되었다.</p>
-    <p>특히 땀이나 수분이 묻으면 색이 짙어지는 <strong>회색 트레이닝 바지를 절대 입지 못하는 치명적인 약점</strong>이 포착되면서 사실상 요실금 환자로 굳어졌다. 지인들은 "감탄사로 '지린다'를 쓰는 게 아니라 진짜 생리현상을 예고하는 복선이었다"며 경악을 금치 못하고 있다.<a href="#fn6" class="footnote">[6]</a></p>
+    <h3 id="s-4-3">4.3. 상습 배뇨 및 회색 바지 기피(요실금) 의혹</h3>
+    <p>입버릇처럼 <strong>"지린다"</strong>는 말을 달고 살더니, 실제로도 통제력을 상실하고 지리는 것이 아니냐는 충격적인 의혹이 제기되었다. 수분이 묻으면 색이 변하는 <strong>회색 트레이닝 바지를 절대 입지 못하는 치명적인 약점</strong>이 포착되면서 사실상 요실금 환자로 굳어졌다.<a href="#fn5" class="footnote">[5]</a></p>
 
-    <h3 id="s-4-4" style="font-size: 15px; margin: 12px 0 6px;">4.4. 롤 1대1 굴욕패 및 영구 잠적(탈주닌자) 사건</h3>
-    <p>자신의 롤 실력을 과신하며 호기롭게 1대1 미드빵을 신청했다가, <strong>처참하게 털리고 넥서스가 터지자마자 게임을 강제 종료</strong>한 전설적인 사건이다.</p>
-    <p>패배의 충격이 얼마나 컸는지 그날 이후로 롤 클라이언트를 켜지 못하고 있으며, 디스코드에서도 리그 오브 레전드 관련 이야기만 나오면 '탈주닌자'처럼 귀신같이 오프라인으로 사라지는 기행을 선보이고 있다.<a href="#fn7" class="footnote">[7]</a></p>
+    <h3 id="s-4-4">4.4. 롤 1대1 굴욕패 및 영구 잠적(탈주닌자) 사건</h3>
+    <p>호기롭게 1대1 미드빵을 신청했다가, <strong>처참하게 털리고 넥서스가 터지자마자 게임을 강제 종료</strong>한 후 롤판에서 완전히 자취를 감추었다.</p>
 
-    <h3 id="s-4-5" style="font-size: 15px; margin: 12px 0 6px;">4.5. '술 빨자' 아가리 주폭 및 여성 감응형 음주 논란</h3>
-    <p>단톡방에서 매일같이 <strong>"야 오늘 술 빨자", "한잔 적셔야지"</strong>라며 어그로를 끌지만, 정작 남자들끼리 모이면 절대 나오지 않는다. 알고 보니 <strong>"여자가 없으면 술을 마시지 않는다"</strong>는 확고한(?) 쓰레기 신념을 가지고 있는 것으로 드러났다.</p>
-    <p>자리에 여성이 동석한다는 소식이 들려야만 비로소 신발을 신고 튀어나오는 전형적인 '여미새형 주폭'이다.</p>
+    <h3 id="s-4-5">4.5. '술 빨자' 아가리 주폭 및 여성 감응형 음주 논란</h3>
+    <p>단톡방에서 <strong>"야 오늘 술 빨자"</strong>라며 어그로를 끌지만, 자리에 여성이 동석한다는 소식이 들려야만 비로소 나타나는 전형적인 '선택적 여미새형 주폭'이다.</p>
 
-    <h3 id="s-4-6" style="font-size: 15px; margin: 12px 0 6px;">4.6. 여행지 인간 술자판기(황금 고블린) 사건</h3>
-    <p>지인들과 여행을 갈 때 <strong>옷이나 세면도구는 하나도 챙기지 않고 캐리어 전체를 술병으로 꽉 채워오는</strong> 기행을 저질렀다. 가방을 열었을 때 옷가지 대신 보드카, 위스키, 소주가 쏟아져 나오는 모습은 가히 충격과 공포였다.</p>
-    <p>이후 친구들 사이에서 <strong>'지나가다 한 대 치면 술을 드랍하는 황금 고블린'</strong>, <strong>'걸어 다니는 주류 자판기'</strong>로 공식 지정되었다.<a href="#fn8" class="footnote">[8]</a></p>
+    <h3 id="s-4-6">4.6. 여행지 인간 술자판기(황금 고블린) 사건</h3>
+    <p>여행을 갈 때 <strong>옷이나 세면도구 없이 캐리어 전체를 술병으로 꽉 채워오는</strong> 기행을 저질렀다. 친구들 사이에서 <strong>'지나가다 한 대 치면 술을 드랍하는 황금 고블린'</strong>으로 지정되었다.</p>
 
-    <h3 id="s-4-7" style="font-size: 15px; margin: 12px 0 6px;">4.7. 불순한 기타 연주 및 최종 목적 달성 논란</h3>
-    <p>어느 날 갑자기 예술혼에 불타오른 척 통기타를 연습하기 시작했다. 주변 지인들은 모두 "저놈 100% 여자 꼬시려고 폼 잡는 거다"라며 비난을 쏟아부었으나, 본인은 "순수한 음악적 열정"이라며 펄쩍 뛰었다.</p>
-    <p>그러나 얼마 지나지 않아 <strong>실제로 기타를 이용해 여자를 만나는 데 성공</strong>하면서, 그의 기타 연주는 음악이 아닌 철저히 계산된 '흑심의 도구'였음이 만천하에 드러났다.</p>
+    <h3 id="s-4-7">4.7. 불순한 기타 연주 및 최종 목적 달성 논란</h3>
+    <p>음악적 열정을 핑계로 통기타를 잡더니, 얼마 지나지 않아 <strong>실제로 기타로 여자를 만나는 데 성공</strong>하며 그 불순한 야망을 실현했다.</p>
 
     <!-- 5. 유행어 및 어록 -->
     <h2 id="s-5"><span>5. 유행어 및 어록</span> <span class="edit-btn">[편집]</span></h2>
     <div class="quote-box">
       "아... 오늘 단백질 달달하네." <span class="del">(피해 남성들은 다리에 힘이 풀린 채 쓰러져 있었다)</span><br>
       "아... 지린다." <span class="del">(바지를 슬그머니 확인하며)</span><br>
-      "야 오늘 술 빨자!" <span class="del">(여자가 없다는 소식을 듣고 5초 만에 약속을 취소하며)</span><br>
-      "여자가 없는데 술을 왜 마셔?"<br>
+      "야 오늘 술 빨자!" <span class="del">(여자가 없다는 소식에 3초 컷 잠수)</span><br>
       "나 빠른 99야. (98년생 친구의 뒤통수를 치며)"<br>
-      "은혁아, 오늘도 오므라이스에 케첩 하트 그려줄까?" <span class="del">(메이드 카페 영업 중)</span><br>
-      "오이시쿠나레 모에모에 큥~ (호주 억양으로)"<br>
-      "아 1대1 렉 걸렸다고! 롤 삭제함."
+      "오이시쿠나레 모에모에 큥~ (호주 억양으로)"
     </div>
 
     <!-- 6. 여담 -->
     <h2 id="s-6"><span>6. 여담</span> <span class="edit-btn">[편집]</span></h2>
     <ul>
-      <li>헬스장에 가면 운동보다 거울 앞에서 조명 각도를 찾고 인스타 스토리를 올리는 데 더 많은 시간을 소모한다.</li>
-      <li>지인 남자들을 만날 때마다 음흉한 눈빛으로 상대방의 '단백질' 상태를 스캔하는 버릇이 있다.</li>
+      <li>지인 남자들을 만날 때마다 음흉한 눈빛으로 상대방의 '단백질(근손실)' 상태를 스캔하는 버릇이 있다.</li>
       <li>옷장 안에 검은색, 짙은 네이비색 바지만 가득하며 회색 옷은 쳐다보지도 않는다.</li>
-      <li>한국어로 대화하다가 본인에게 불리한 상황이 오면 갑자기 유창한 호주식 영어를 난사하며 회피 기동을 시전한다.</li>
       <li>메이드 카페에서 일하지만 본인이 집에서 키우는 고양이보다 애교가 없다는 평가를 받는다.</li>
-      <li><a href="index.html" class="wiki-link">여은혁</a>의 위키 문서를 보고 낄낄거리며 비웃었으나, 본인 문서에 요실금과 단백질 흡혈귀 의혹이 박제되자 극대노 중이다.</li>
+      <li><a href="index.html">여은혁</a>의 위키 문서를 보고 낄낄거리며 비웃었으나, 본인 문서에 요실금과 단백질 흡혈귀 의혹이 박제되자 극대노 중이다.</li>
     </ul>
 
     <!-- 각주 영역 -->
     <div class="footnote-list">
-      <p id="fn1">[1] 착용 시 생존을 보장할 수 없다는 의학적 소견이 있다.</p>
-      <p id="fn2">[2] 신장 538cm의 드래곤이 메이드 카페 문을 열고 들어올 때마다 매장 내 전구가 흔들렸다는 괴담이 있다.</p>
-      <p id="fn3">[3] 사진 속 두 사람의 표정이 너무나도 행복해 보여 지인들은 경악을 금치 못했다고 한다.</p>
-      <p id="fn4">[4] 48시간을 뛰어도 98년생의 벽을 넘을 순 없다.</p>
-      <p id="fn5">[5] 물론 진짜 '보충제' 이야기다. <span class="del">이상한 상상은 하지 말자.</span></p>
-      <p id="fn6">[6] 지인들은 그가 '지린다'를 외칠 때마다 자동으로 1미터씩 뒤로 물러서는 반사신경을 기르게 되었다.</p>
-      <p id="fn7">[7] 전적 검색 결과, 마지막 판의 KDA는 차마 눈 뜨고 볼 수 없는 수준이었다.</p>
-      <p id="fn8">[8] 뒤통수를 가볍게 치면 참이슬 후레쉬가 나오고, 명치를 세게 치면 고급 양주가 나온다는 전설이 있다.</p>
+      <p id="fn1">[1] 착용 시 사회적 매장을 피할 수 없다는 소견이 있다.</p>
+      <p id="fn2">[2] 당시 여은혁은 "내 닭가슴살에 손대면 용의 브레스를 뿜겠다"며 극대노했다.</p>
+      <p id="fn3">[3] 48시간을 뛰어도 98년생의 벽을 넘을 순 없다.</p>
+      <p id="fn4">[4] 물론 진짜 '보충제' 이야기다. 이상한 상상은 하지 말자.</p>
+      <p id="fn5">[5] 지인들은 그가 '지린다'를 외칠 때마다 자동으로 1미터씩 뒤로 물러서는 반사신경을 기르게 되었다.</p>
     </div>
   </div>
 
