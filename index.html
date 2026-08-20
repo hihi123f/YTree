@@ -9,12 +9,14 @@
       --namu-green: #008275;
       --namu-border: #cccccc;
       --namu-link: #0275d8;
+      --namu-toc-bg: #f9f9f9;
     }
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", sans-serif;
+      scroll-behavior: smooth;
     }
     body {
       background-color: #ffffff;
@@ -129,12 +131,46 @@
       vertical-align: middle;
     }
 
-    /* 목차 & 텍스트 */
+    /* 나무위키 목차 (TOC) */
+    .toc {
+      background-color: var(--namu-toc-bg);
+      border: 1px solid #ccc;
+      padding: 10px 14px;
+      margin: 15px 0 25px 0;
+      border-radius: 4px;
+      display: inline-block;
+      min-width: 220px;
+    }
+    .toc-title {
+      font-weight: bold;
+      font-size: 14px;
+      text-align: center;
+      margin-bottom: 6px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 4px;
+    }
+    .toc ol {
+      list-style-type: none;
+      padding-left: 0;
+      font-size: 13px;
+    }
+    .toc ol li {
+      margin-bottom: 4px;
+    }
+    .toc ol li a {
+      color: var(--namu-link);
+      text-decoration: none;
+    }
+    .toc ol li a:hover {
+      text-decoration: underline;
+    }
+
+    /* 목차 헤더 & 텍스트 */
     h2 {
       font-size: 17px;
       font-weight: bold;
       color: #000;
-      margin-top: 22px;
+      margin-top: 28px;
       margin-bottom: 8px;
       border-bottom: 1px solid #ccc;
       padding-bottom: 4px;
@@ -171,6 +207,28 @@
       color: var(--namu-link);
       text-decoration: none;
     }
+    .footnote {
+      font-size: 11px;
+      vertical-align: super;
+      color: var(--namu-link);
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .footnote-list {
+      margin-top: 30px;
+      border-top: 1px dashed #ccc;
+      padding-top: 10px;
+      font-size: 12px;
+      color: #666;
+    }
+    .quote-box {
+      border-left: 4px solid var(--namu-green);
+      background-color: #f8f9fa;
+      padding: 10px 14px;
+      margin: 10px 0;
+      font-size: 13px;
+      font-style: italic;
+    }
   </style>
 </head>
 <body>
@@ -191,7 +249,7 @@
     <!-- 분류 태그 -->
     <div class="category-box">
       <div>
-        <strong>분류:</strong> <a href="#" class="wiki-link">1998년 출생</a> | <a href="#" class="wiki-link">드래곤족</a> | <a href="#" class="wiki-link">호구(게임)</a> | <a href="#" class="wiki-link">롤 대리/버스 논란</a>
+        <strong>분류:</strong> <a href="#" class="wiki-link">1998년 출생</a> | <a href="#" class="wiki-link">드래곤족</a> | <a href="#" class="wiki-link">시흥시 출신 인물</a> | <a href="#" class="wiki-link">호구(게임)</a> | <a href="#" class="wiki-link">롤 버스 탑승자</a>
       </div>
       <div style="color: #888;">더 보기</div>
     </div>
@@ -206,17 +264,16 @@
       </tr>
       <tr>
         <td colspan="2" class="infobox-img-container">
-          <!-- 깃허브 사진 경로 (그대로 유지) -->
           <img src="KakaoTalk_20260820_184429607.jpg" alt="여은혁 프로필 사진">
         </td>
       </tr>
       <tr>
         <th>출생</th>
-        <td>2003년 10월 30일 (23세)<br><a href="#" class="wiki-link">드래곤 둥지 (현 서울특별시)</a></td>
+        <td>1998년 10월 30일 (28세)<br><a href="#" class="wiki-link">드래곤 둥지 (현 경기도 시흥시)</a></td>
       </tr>
       <tr>
         <th>종족</th>
-        <td>🐉 <a href="#" class="wiki-link">드래곤족 (Dragon)</a></td>
+        <td>🐉 <a href="#" class="wiki-link">드래곤족 (Dragon)</a><a href="#fn1" class="footnote">[1]</a></td>
       </tr>
       <tr>
         <th>국적</th>
@@ -227,45 +284,76 @@
         <td><strong>538cm</strong>, O형, 발사이즈 290mm</td>
       </tr>
       <tr>
-        <th>가족</th>
-        <td>부모님, 형(2001년생)</td>
+        <th>주요 서식지</th>
+        <td>침대 위, 노래방 1번 방, 칼바람 나락</td>
       </tr>
       <tr>
         <th>MBTI</th>
-        <td><a href="#" class="wiki-link">ISFJ</a></td>
+        <td><a href="#" class="wiki-link">ISFJ</a> <span class="del">(본인은 냉혈한 T라고 우김)</span></td>
       </tr>
     </table>
 
+    <!-- 나무위키 목차 (TOC) -->
+    <div class="toc">
+      <div class="toc-title">목차</div>
+      <ol>
+        <li><a href="#s-1">1. 개요</a></li>
+        <li><a href="#s-2">2. 신체적 특징</a></li>
+        <li><a href="#s-3">3. 리그 오브 레전드 및 게임 플레이 스타일</a></li>
+        <li><a href="#s-4">4. 사건 사고 및 논란</a>
+          <ol style="padding-left: 14px;">
+            <li><a href="#s-4-1">4.1. 플래티넘 호소 및 버스 탑승 적발 사건</a></li>
+            <li><a href="#s-4-2">4.2. 모바일 게임 120만 원 탕진 사건</a></li>
+          </ol>
+        </li>
+        <li><a href="#s-5">5. 어록</a></li>
+        <li><a href="#s-6">6. 여담</a></li>
+      </ol>
+    </div>
+
     <!-- 1. 개요 -->
-    <h2><span>1. 개요</span> <span class="edit-btn">[편집]</span></h2>
-    <p>대한민국의 인물이자 인간계에 숨어 살고 있는 <strong>드래곤족</strong>. 겉으로는 평범한 침대 위 릴스 중독자 백수처럼 보이지만, 본모습은 신장 5미터가 넘어가는 거구다. <span class="del">물론 평소에는 마나를 아끼기 위해 평범한 인간 남성의 모습으로 폴리모프(변신)하고 다닌다는 설정에 심취해 있다.</span></p>
-    <p>특유의 능청스러움과 알 수 없는 뻔뻔한 자신감으로 주변인들의 정신력을 갉아먹는 패시브 스킬을 보유하고 있다.</p>
+    <h2 id="s-1"><span>1. 개요</span> <span class="edit-btn">[편집]</span></h2>
+    <p>대한민국의 인물이자 시흥시에 은신 중인 <strong>고위 드래곤족</strong>. 평소에는 마나 소모를 줄이기 위해 평범한 인간 청년의 모습으로 폴리모프하여 살아가고 있다. <span class="del">주요 활동 반경은 침대 반경 2미터를 벗어나지 않는다.</span></p>
+    <p>엄청난 뻔뻔함과 억지 논리로 무장하여 지인들의 멘탈을 갉아먹는 능력이 탁월하다.</p>
 
     <!-- 2. 신체적 특징 -->
-    <h2><span>2. 신체적 특징</span> <span class="edit-btn">[편집]</span></h2>
-    <p>가장 큰 특징은 무려 <strong>538cm</strong>에 달하는 경이로운 키다. 이 때문에 식당에 들어갈 때 몸을 3번 접어야 하며, 마을버스 탑승 시 머리가 천장을 뚫고 나가는 기행을 보여준다.</p>
-    <p>다만 신장에 비해 발 사이즈가 <strong>290mm</strong>로 기형적으로 매우 작다. <span class="del">신체 비율이 거의 하이힐을 신은 티라노사우루스 수준이다.</span> 이 때문에 무게 중심을 잡지 못해 길을 걷다 자주 넘어지며, 본인은 이를 "바람의 저항을 줄이기 위한 고등 진화"라고 핑계 댄다.</p>
+    <h2 id="s-2"><span>2. 신체적 특징</span> <span class="edit-btn">[편집]</span></h2>
+    <p>종족값에 걸맞게 신장이 무려 <strong>538cm</strong>에 달한다. 시흥시 일대에서 전봇대보다 큰 생명체가 걸어 다니는 것이 목격된다면 십중팔구 여은혁이다.</p>
+    <p>그러나 키에 비해 발 사이즈는 고작 <strong>290mm</strong>에 불과하다. <span class="del">거의 이쑤시개 위에 얹어진 볼링공 수준의 안정감이다.</span> 이 기형적인 비율 탓에 바람만 불어도 휘청거리며, 길을 걷다 혼자 발이 꼬여 넘어지는 참사가 잦다. 본인은 이를 "공기 저항을 최소화한 최첨단 드래곤의 체형"이라고 주장한다.</p>
 
-    <!-- 3. 사건 사고 및 논란 -->
-    <h2><span>3. 사건 사고 및 논란</span> <span class="edit-btn">[편집]</span></h2>
+    <!-- 3. 롤 플레이 스타일 -->
+    <h2 id="s-3"><span>3. 리그 오브 레전드 및 게임 플레이 스타일</span> <span class="edit-btn">[편집]</span></h2>
+    <p>같은 드래곤 종족이라는 이유 하나만으로 <a href="#" class="wiki-link">쉬바나</a>, <a href="#" class="wiki-link">아우렐리온 솔</a>, <a href="#" class="wiki-link">스몰더</a> 같은 파충류 계열 챔피언에 광적인 집착을 보인다. 심지어 인게임에서 드래곤 오브젝트(용)가 젠되면 팀의 오더와 상관없이 혼자 용 둥지로 돌진하여 의문사하는 '용 집착 증후군'을 앓고 있다.</p>
+    <p>주 포지션은 버스 승객이며, 팀원이 킬을 따내면 "내가 판 깔아줬다"며 숟가락을 얹는 뻔뻔함을 보여준다.</p>
+
+    <!-- 4. 사건 사고 및 논란 -->
+    <h2 id="s-4"><span>4. 사건 사고 및 논란</span> <span class="edit-btn">[편집]</span></h2>
+    
+    <h3 id="s-4-1" style="font-size: 15px; margin: 12px 0 6px;">4.1. 플래티넘 호소 및 버스 탑승 적발 사건</h3>
+    <p>지인들에게 본인이 드디어 롤 '플래티넘'에 등극했다며 티어 부심을 부리다 전적 사이트(OP.GG)에 의해 덜미를 잡힌 사건이다. 혼자 돌리는 솔로 랭크는 여전히 골드4에서 헤엄치고 있었으며, 플래티넘을 찍은 것은 친구들의 바짓가랑이를 붙잡고 달성한 <strong>자유 랭크</strong>였음이 밝혀졌다.<a href="#fn2" class="footnote">[2]</a></p>
+
+    <h3 id="s-4-2" style="font-size: 15px; margin: 12px 0 6px;">4.2. 모바일 게임 120만 원 탕진 사건</h3>
+    <p>확률형 뽑기 게임에 <strong>120만 원</strong>이라는 거금을 태우고도 천장을 치지 못해 원하는 캐릭터를 뽑지 못한 레전드 흑역사다. 사건 직후 3일 동안 밥도 먹지 않고 방구석에서 릴스만 보며 넋을 놓았다고 전해진다. <span class="del">본인은 "앞으로의 10년을 위한 투자였다"는 궤변을 늘어놓고 있다.</span></p>
+
+    <!-- 5. 어록 -->
+    <h2 id="s-5"><span>5. 어록</span> <span class="edit-btn">[편집]</span></h2>
+    <div class="quote-box">
+
+    </div>
+
+    <!-- 6. 여담 -->
+    <h2 id="s-6"><span>6. 여담</span> <span class="edit-btn">[편집]</span></h2>
     <ul>
-      <li><strong>리그 오브 레전드 플래티넘 호소 사건</strong>
-        <br>최근 주변 지인들에게 롤 티어 '플래티넘'을 달성했다며 동네방네 떠들고 다니며 거들먹거린 사건이다. 하지만 전적 검색 결과, 본인 실력으로 올린 솔로 랭크가 아니라 고티어 지인들의 바짓가랑이를 붙잡고 멱살 캐리 당한 <strong>자유 랭크(다인큐)</strong>임이 들통나 큰 비웃음을 샀다. <span class="del">참고로 찐 솔로랭크는 실버 구간에서 300판째 허덕이고 있다고 한다.</span>
-      </li>
-      <br>
-      <li><strong>게임 120만 원 탕진 사건</strong>
-        <br>게임에 무려 <strong>120만 원</strong>을 쏟아붓는 미친 과금력을 보여주어 주변을 경악하게 했다. 더 비참한 것은 120만 원을 박고도 정작 본인이 원하던 캐릭터를 뽑지 못해 3일 밤낮을 방구석에서 오열했다는 점이다. <span class="del">어머니가 이 나무위키 문서를 발견하지 않기만을 바랄 뿐이다.</span>
-      </li>
+      <li>자타공인 <strong>노래방 고음충</strong>이다. 상대방을 고려하지 않은 채 하현우의 〈Don't Cry〉나 엠씨더맥스의 곡들을 난사한다. 3옥타브 클라이맥스에 도달하면 돌고래 비명 소리를 내며 방 안의 모든 사람을 청각장애의 위기에 빠뜨린다.</li>
+      <li>MBTI가 ISFJ로 알려져 있으나 본인은 지성적이고 차가운 T(사고형)라고 우긴다. 하지만 게임에서 지거나 친구들이 조금만 팩트로 공격하면 눈시울이 붉어지는 편이다.</li>
+      <li>당일 밤 11시에 배달 어플을 켜서 야식을 시켜 먹는 전형적인 <strong>'도파민 충'</strong>다.</li>
     </ul>
 
-    <!-- 4. 여담 -->
-    <h2><span>4. 여담</span> <span class="edit-btn">[편집]</span></h2>
-    <ul>
-      <li>자타공인 심각한 <strong>고음충</strong>이다. 노래방에 가면 하현우, 엠씨더맥스 노래만 예약한다. 돌고래 서식지로 만들어버린다.</li>
-      <li>같은 동족(?)이라 그런지 <strong>'드래곤만 보면 참지 못하는 병'</strong>이 있다는 흉흉한 소문이 돌고 있다. <span class="del">물론 진짜 수상한 취향이라는 뜻은 아니고, 게임에서 드래곤 관련 캐릭터나 스킨만 나오면 눈이 돌아가서 지갑을 연다는 뜻이다. 오해하지 말자.</span></li>
-      
-      
-    </ul>
+    <!-- 각주 영역 -->
+    <div class="footnote-list">
+      <p id="fn1">[1] 학계에 보고되지 않은 희귀 드래곤 종족이다. 브레스 대신 삑사리를 뿜는다.</p>
+      <p id="fn2">[2] 당시 함께 게임했던 지인은 "거의 시체를 끌고 산을 넘는 기분이었다"고 증언했다.</p>
+    </div>
   </div>
 
 </body>
