@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>경훈냥이 - 나무위키</title>
+  <style>
+    :root {
+      --namu-green: #008275;
+      --namu-border: #cccccc;
+      --namu-link: #0275d8;
+      --namu-toc-bg: #f9f9f9;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", sans-serif;
+      scroll-behavior: smooth;
+    }
+    body {
+      background-color: #ffffff;
+      color: #373a3c;
+      line-height: 1.6;
+    }
+
+    /* 상단 내비바 */
+    .header {
+      background-color: var(--namu-green);
+      color: white;
+      padding: 10px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header .title {
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .search-bar {
+      display: flex;
+      align-items: center;
+      background: white;
+      border-radius: 4px;
+      padding: 6px 10px;
+      margin: 8px 12px;
+      border: 1px solid #ddd;
+      font-size: 13px;
+      color: #888;
+    }
+
+    /* 본문 레이아웃 */
+    .container {
+      padding: 10px 14px 40px;
+    }
+    .doc-title {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 4px;
+    }
+    .category-box {
+      font-size: 12px;
+      background-color: #fafafa;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      padding: 6px 10px;
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .category-box a {
+      color: var(--namu-link);
+      text-decoration: none;
+    }
+
+    /* 프로필 인포박스 */
+    .infobox {
+      width: 100%;
+      border-collapse: collapse;
+      border: 2px solid var(--namu-green);
+      margin-bottom: 20px;
+      font-size: 13.5px;
+    }
+    .infobox-title {
+      background-color: var(--namu-green);
+      color: white;
+      text-align: center;
+      padding: 8px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .infobox-title span {
+      display: block;
+      font-size: 12px;
+      font-weight: normal;
+      color: #d1f2eb;
+    }
+    .infobox-img-container {
+      text-align: center;
+      background: #fafafa;
+      border-bottom: 1px solid var(--namu-border);
+      padding: 10px;
+    }
+    .infobox-img-container img {
+      max-width: 100%;
+      height: auto;
+      max-height: 420px;
+      display: block;
+      margin: 0 auto;
+      object-fit: cover;
+    }
+    .infobox th {
+      background-color: var(--namu-green);
+      color: white;
+      width: 28%;
+      padding: 7px 8px;
+      text-align: center;
+      vertical-align: middle;
+      font-weight: bold;
+      border: 1px solid var(--namu-border);
+    }
+    .infobox td {
+      background-color: #ffffff;
+      padding: 7px 10px;
+      border: 1px solid var(--namu-border);
+      vertical-align: middle;
+    }
+
+    /* 나무위키 목차 */
+    .toc {
+      background-color: var(--namu-toc-bg);
+      border: 1px solid #ccc;
+      padding: 10px 14px;
+      margin: 15px 0 25px 0;
+      border-radius: 4px;
+      display: inline-block;
+      min-width: 220px;
+    }
+    .toc-title {
+      font-weight: bold;
+      font-size: 14px;
+      text-align: center;
+      margin-bottom: 6px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 4px;
+    }
+    .toc ol {
+      list-style-type: none;
+      padding-left: 0;
+      font-size: 13px;
+    }
+    .toc ol li {
+      margin-bottom: 4px;
+    }
+    .toc ol li a {
+      color: var(--namu-link);
+      text-decoration: none;
+    }
+    .toc ol li a:hover {
+      text-decoration: underline;
+    }
+
+    /* 목차 헤더 */
+    h2 {
+      font-size: 17px;
+      font-weight: bold;
+      color: #000;
+      margin-top: 28px;
+      margin-bottom: 8px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    h2 span.edit-btn {
+      font-size: 11px;
+      color: var(--namu-link);
+      font-weight: normal;
+    }
+    p {
+      font-size: 13.5px;
+      margin-bottom: 10px;
+      word-break: keep-all;
+    }
+    ul {
+      margin-left: 18px;
+      margin-bottom: 12px;
+    }
+    li {
+      font-size: 13.5px;
+      margin-bottom: 8px;
+      word-break: keep-all;
+    }
+
+    /* 위키 스타일 */
+    .del {
+      text-decoration: line-through;
+      color: #888888;
+    }
+    a.wiki-link {
+      color: var(--namu-link);
+      text-decoration: none;
+    }
+    .footnote {
+      font-size: 11px;
+      vertical-align: super;
+      color: var(--namu-link);
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .footnote-list {
+      margin-top: 30px;
+      border-top: 1px dashed #ccc;
+      padding-top: 10px;
+      font-size: 12px;
+      color: #666;
+    }
+    .quote-box {
+      border-left: 4px solid var(--namu-green);
+      background-color: #f8f9fa;
+      padding: 12px 16px;
+      margin: 10px 0;
+      font-size: 14px;
+      font-style: italic;
+      line-height: 1.8;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="title">나무위키</div>
+    <div style="font-size: 13px;">최근변경 | 토론</div>
+  </div>
+
+  <div class="search-bar">
+    🔍 여기서 검색
+  </div>
+
+  <div class="container">
+    <!-- 본문 제목 -->
+    <div class="doc-title">경훈냥이</div>
+
+    <!-- 분류 태그 -->
+    <div class="category-box">
+      <div>
+        <strong>분류:</strong> <a href="#" class="wiki-link">1998년 출생</a> | <a href="#" class="wiki-link">메이드 카페 종사자</a> | <a href="#" class="wiki-link">호주 귀화 의혹 인물</a> | <a href="#" class="wiki-link">탈주닌자</a> | <a href="#" class="wiki-link">황금 고블린</a>
+      </div>
+      <div style="color: #888;">더 보기</div>
+    </div>
+
+    <!-- 프로필 테이블 -->
+    <table class="infobox">
+      <tr>
+        <th colspan="2" class="infobox-title">
+          경훈냥이
+          <span>Kyunghoon the Cat (Gyeonghoon-nyang)</span>
+        </th>
+      </tr>
+      <tr>
+        <td colspan="2" class="infobox-img-container">
+          <img src="kyunghoon.jpg" alt="경훈냥이 프로필 사진">
+        </td>
+      </tr>
+      <tr>
+        <th>출생</th>
+        <td>1998년생 (28세)<br><a href="#" class="wiki-link">시드니(추정)</a> 혹은 대한민국</td>
+      </tr>
+      <tr>
+        <th>국적</th>
+        <td>🇦🇺 호주 <span class="del">(한국어 구사력이 영단어보다 떨어짐)</span></td>
+      </tr>
+      <tr>
+        <th>직업</th>
+        <td><a href="#" class="wiki-link">메이드 카페</a> 서빙 및 응대 스태프<a href="#fn1" class="footnote">[1]</a></td>
+      </tr>
+      <tr>
+        <th>별명</th>
+        <td>롤 탈주닌자, 움직이는 술자판기, 황금 고블린, 기타남</td>
+      </tr>
+      <tr>
+        <th>특기/스킬</th>
+        <td>영어로 한국어 왜곡하기, 캐리어 술 압축 보관, 기타 폼잡기</td>
+      </tr>
+    </table>
+
+    <!-- 나무위키 목차 -->
+    <div class="toc">
+      <div class="toc-title">목차</div>
+      <ol>
+        <li><a href="#s-1">1. 개요</a></li>
+        <li><a href="#s-2">2. 직업 및 활동</a></li>
+        <li><a href="#s-3">3. 사건 사고 및 논란</a>
+          <ol style="padding-left: 14px;">
+            <li><a href="#s-4-1">3.1. 롤 1대1 굴욕패 및 영구 잠적(탈주닌자) 사건</a></li>
+            <li><a href="#s-4-2">3.2. '술 빨자' 아가리 주폭 및 노쇼 논란</a></li>
+            <li><a href="#s-4-3">3.3. 여행지 인간 술자판기(황금 고블린) 사건</a></li>
+            <li><a href="#s-4-4">3.4. 불순한 기타 연주 및 최종 목적 달성 논란</a></li>
+          </ol>
+        </li>
+        <li><a href="#s-4">4. 어록</a></li>
+        <li><a href="#s-5">5. 여담</a></li>
+      </ol>
+    </div>
+
+    <!-- 1. 개요 -->
+    <h2 id="s-1"><span>1. 개요</span> <span class="edit-btn">[편집]</span></h2>
+    <p>대한민국의 인물이자 자칭 <strong>메이드 카페의 아이돌</strong>. 1998년생으로, 한국어보다 영어가 더 유창해 사실상 캥거루국(호주)에서 밀입국한 것이 아니냐는 국적 의혹을 끊임없이 받고 있다.</p>
+    <p>롤 판에서는 <strong>'탈주닌자'</strong>, 현실 술자리에서는 <strong>'황금 고블린'</strong>이라 불리는 등 가상과 현실 모두에서 기행을 일삼는 인물이다.</p>
+
+    <!-- 2. 직업 및 활동 -->
+    <h2 id="s-2"><span>2. 직업 및 활동</span> <span class="edit-btn">[편집]</span></h2>
+    <p>놀랍게도 현직 <strong>메이드 카페 직원</strong>이다. 본인은 전문적인 서비스 마인드를 갖추고 서빙한다고 주장하나, 손님이 오면 특유의 어눌한 한국어와 버터 발음의 영어로 "오이시쿠나레~"를 외치는 모습이 지인들에게 여러 차례 목격되었다.</p>
+
+    <!-- 3. 사건 사고 및 논란 -->
+    <h2 id="s-3"><span>3. 사건 사고 및 논란</span> <span class="edit-btn">[편집]</span></h2>
+    
+    <h3 id="s-4-1" style="font-size: 15px; margin: 12px 0 6px;">3.1. 롤 1대1 굴욕패 및 영구 잠적(탈주닌자) 사건</h3>
+    <p>자신의 롤 실력을 과신하며 호기롭게 1대1 미드빵을 신청했다가, <strong>처참하게 털리고 넥서스가 터지자마자 게임을 강제 종료</strong>한 전설적인 사건이다.</p>
+    <p>패배의 충격이 얼마나 컸는지 그날 이후로 롤 클라이언트를 켜지 못하고 있으며, 디스코드에서도 리그 오브 레전드 관련 이야기만 나오면 '탈주닌자'처럼 귀신같이 오프라인으로 사라지는 기행을 선보이고 있다.<a href="#fn2" class="footnote">[2]</a></p>
+
+    <h3 id="s-4-2" style="font-size: 15px; margin: 12px 0 6px;">3.2. '술 빨자' 아가리 주폭 및 노쇼 논란</h3>
+    <p>단톡방에서 매일같이 <strong>"야 오늘 술 빨자", "한잔 적셔야지"</strong>라며 온갖 어그로를 끌어모으지만, 정작 날짜와 장소를 잡으면 "아 오늘은 좀..."이라며 나타나지 않는 상습 노쇼범이다. 이 때문에 지인들 사이에서는 '입으로만 짝으로 마시는 아가리 주폭'이라는 멸칭이 붙었다.</p>
+
+    <h3 id="s-4-3" style="font-size: 15px; margin: 12px 0 6px;">3.3. 여행지 인간 술자판기(황금 고블린) 사건</h3>
+    <p>지인들과 여행을 갈 때 <strong>옷이나 세면도구는 하나도 챙기지 않고 캐리어 전체를 술병으로 꽉 채워오는</strong> 기행을 저질렀다. 가방을 열었을 때 옷가지 대신 보드카, 위스키, 소주가 쏟아져 나오는 모습은 가히 충격과 공포였다.</p>
+    <p>이후 친구들 사이에서 <strong>'지나가다 한 대 치면 술을 드랍하는 황금 고블린'</strong>, <strong>'걸어 다니는 주류 자판기'</strong>로 공식 지정되었다.<a href="#fn3" class="footnote">[3]</a></p>
+
+    <h3 id="s-4-4" style="font-size: 15px; margin: 12px 0 6px;">3.4. 불순한 기타 연주 및 최종 목적 달성 논란</h3>
+    <p>어느 날 갑자기 예술혼에 불타오른 척 통기타를 연습하기 시작했다. 주변 지인들은 모두 "저놈 100% 여자 꼬시려고 폼 잡는 거다"라며 비난을 쏟아부었으나, 본인은 "순수한 음악적 열정"이라며 펄쩍 뛰었다.</p>
+    <p>그러나 얼마 지나지 않아 <strong>실제로 기타를 이용해 여자를 만나는 데 성공</strong>하면서, 그의 기타 연주는 음악이 아닌 철저히 계산된 '흑심의 도구'였음이 만천하에 드러났다.</p>
+
+    <!-- 4. 어록 -->
+    <h2 id="s-4"><span>4. 어록</span> <span class="edit-btn">[편집]</span></h2>
+    <div class="quote-box">
+      "야 오늘 진짜 술 빨자! (집 밖으로 안 나옴)"<br>
+      "아 1대1 렉 걸렸다고! 롤 삭제함."<br>
+      "오이시쿠나레 모에모에 큥~ (호주 억양으로)"<br>
+      "난 음악을 사랑해서 기타를 치는 거야. (목적 달성 완료)"
+    </div>
+
+    <!-- 5. 여담 -->
+    <h2 id="s-5"><span>5. 여담</span> <span class="edit-btn">[편집]</span></h2>
+    <ul>
+      <li>한국어로 대화하다가 본인에게 불리한 상황이 오면 갑자기 유창한 호주식 영어를 난사하며 회피 기동을 시전한다.</li>
+      <li>메이드 카페에서 일하지만 본인이 집에서 키우는 고양이보다 애교가 없다는 평가를 받는다.</li>
+      <li>여은혁과는 10년 지기 악우 관계로, 서로의 기행과 흑역사를 폭로하는 데 인생의 절반을 바치고 있다.</li>
+    </ul>
+
+    <!-- 각주 영역 -->
+    <div class="footnote-list">
+      <p id="fn1">[1] 실물 영접 시 항마력이 부족한 사람은 3초 이상 쳐다볼 수 없다고 전해진다.</p>
+      <p id="fn2">[2] 전적 검색 결과, 마지막 판의 KDA는 차마 눈 뜨고 볼 수 없는 수준이었다.</p>
+      <p id="fn3">[3] 뒤통수를 가볍게 치면 참이슬 후레쉬가 나오고, 명치를 세게 치면 고급 양주가 나온다는 전설이 있다.</p>
+    </div>
+  </div>
+
+</body>
+</html>
