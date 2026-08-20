@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>홍길동 - 나무위키</title>
+  <style>
+    :root {
+      --namu-green: #008275;
+      --namu-table-head: #008275;
+      --namu-table-bg: #f5f5f5;
+      --namu-border: #cccccc;
+      --namu-link: #0275d8;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      background-color: #ffffff;
+      color: #373a3c;
+      line-height: 1.6;
+    }
+
+    /* 상단 네비게이션 */
+    .header {
+      background-color: var(--namu-green);
+      color: white;
+      padding: 10px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header .title {
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .search-bar {
+      display: flex;
+      align-items: center;
+      background: white;
+      border-radius: 4px;
+      padding: 4px 8px;
+      margin: 8px 12px;
+      border: 1px solid #ddd;
+      font-size: 13px;
+      color: #888;
+    }
+
+    /* 본문 레이아웃 */
+    .container {
+      padding: 10px 14px 40px;
+    }
+    .doc-title {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 4px;
+    }
+    .category-box {
+      font-size: 12px;
+      background-color: #fafafa;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      padding: 6px 10px;
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .category-box a {
+      color: var(--namu-link);
+      text-decoration: none;
+    }
+
+    /* 프로필 인포박스 (표) */
+    .infobox {
+      width: 100%;
+      border-collapse: collapse;
+      border: 2px solid var(--namu-table-head);
+      margin-bottom: 20px;
+      font-size: 13px;
+    }
+    .infobox-title {
+      background-color: var(--namu-table-head);
+      color: white;
+      text-align: center;
+      padding: 8px;
+      font-size: 17px;
+      font-weight: bold;
+    }
+    .infobox-title span {
+      display: block;
+      font-size: 12px;
+      font-weight: normal;
+      color: #d1f2eb;
+    }
+    .infobox-img {
+      text-align: center;
+      background: #fdfdfd;
+      padding: 10px;
+      border-bottom: 1px solid var(--namu-border);
+    }
+    .infobox-img img {
+      max-width: 100%;
+      height: auto;
+      max-height: 380px;
+      object-fit: cover;
+    }
+    .infobox th {
+      background-color: var(--namu-table-head);
+      color: white;
+      width: 25%;
+      padding: 6px 8px;
+      text-align: center;
+      vertical-align: middle;
+      font-weight: bold;
+      border: 1px solid var(--namu-border);
+    }
+    .infobox td {
+      background-color: #ffffff;
+      padding: 6px 10px;
+      border: 1px solid var(--namu-border);
+      vertical-align: middle;
+    }
+
+    /* 목차 및 문단 */
+    h2 {
+      font-size: 17px;
+      font-weight: bold;
+      color: #000;
+      margin-top: 20px;
+      margin-bottom: 8px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    h2 span.edit-btn {
+      font-size: 11px;
+      color: var(--namu-link);
+      font-weight: normal;
+      cursor: pointer;
+    }
+    p {
+      font-size: 13.5px;
+      margin-bottom: 10px;
+      word-break: keep-all;
+    }
+    ul {
+      margin-left: 18px;
+      margin-bottom: 12px;
+    }
+    li {
+      font-size: 13.5px;
+      margin-bottom: 8px;
+      word-break: keep-all;
+    }
+
+    /* 나무위키 밈 서식 */
+    .del {
+      text-decoration: line-through;
+      color: #888888;
+    }
+    a.wiki-link {
+      color: var(--namu-link);
+      text-decoration: none;
+    }
+    a.wiki-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="title">나무위키</div>
+    <div style="font-size: 13px;">최근변경 | 토론</div>
+  </div>
+
+  <div class="search-bar">
+    🔍 여기서 검색
+  </div>
+
+  <div class="container">
+    <div class="doc-title">홍길동</div>
+
+    <div class="category-box">
+      <div><strong>분류:</strong> <a href="#">2003년 출생</a> | <a href="#">대한민국의 백수</a> | <a href="#">논란이 있는 인물</a></div>
+      <div style="color: #888;">더 보기</div>
+    </div>
+
+    <!-- 인포박스 -->
+    <table class="infobox">
+      <tr>
+        <th colspan="2" class="infobox-title">
+          홍길동
+          <span>Hong Gildong</span>
+        </th>
+      </tr>
+      <tr>
+        <td colspan="2" class="infobox-img">
+          <!-- 친구 사진 경로 또는 링크를 src에 입력 -->
+          <img src="https://via.placeholder.com/350x420?text=Friends+Photo" alt="프로필 사진">
+        </td>
+      </tr>
+      <tr>
+        <th>출생</th>
+        <td>2003년 10월 30일 (22세)<br><a href="#" class="wiki-link">분당서울대학교병원</a></td>
+      </tr>
+      <tr>
+        <th>국적</th>
+        <td>🇰🇷 <a href="#" class="wiki-link">대한민국</a></td>
+      </tr>
+      <tr>
+        <th>본관</th>
+        <td><a href="#" class="wiki-link">김해 김씨 (金海 金氏)</a></td>
+      </tr>
+      <tr>
+        <th>신체</th>
+        <td>167cm, O형, 발사이즈 240mm</td>
+      </tr>
+      <tr>
+        <th>가족</th>
+        <td>부모님, 언니(2000년생)</td>
+      </tr>
+      <tr>
+        <th>MBTI</th>
+        <td><a href="#" class="wiki-link">ISFJ</a></td>
+      </tr>
+    </table>
+
+    <!-- 1. 개요 -->
+    <h2><span>1. 개요</span> <span class="edit-btn">[편집]</span></h2>
+    <p>대한민국의 인물. <span class="del">인플루언서인 척하고 싶어 하지만 인스타 필터 없이는 외출을 거부한다.</span></p>
+
+    <!-- 2. 사건 사고 및 논란 -->
+    <h2><span>2. 사건 사고 및 논란</span> <span class="edit-btn">[편집]</span></h2>
+    <p>수업 도중 동아리방에서 저녁 식사를 하고 돌아오는 등 불성실한 수업 태도를 보여 논란이 재점화되었다. 이에 대해서는 현재까지 별다른 해명을 내놓지 않고 있다.</p>
+    <p>교양필수 과목인 수업에서도 졸고 있었다는 목격담이 제기되었으나 정확한 사실 여부는 확인되지 않았다.</p>
+
+    <!-- 3. 여담 -->
+    <h2><span>3. 여담</span> <span class="edit-btn">[편집]</span></h2>
+    <ul>
+      <li>MBTI가 자주 바뀌는 편이다. 고등학교 시절에는 ISTJ, 졸업 직후 ESTP였으며 현재 ISFJ로 바뀌어 유지 중이다. 다만 N 유형은 단 한 번도 나온 적이 없다고 한다.</li>
+      <li>힙합을 좋아하지만 특별히 좋아하는 래퍼는 없다고 한다. 가장 좋아하는 곡은 <a href="#" class="wiki-link">Kendrick Lamar</a>의 〈N95〉.</li>
+      <li>축구에 대한 지식이 전무한 상태에서 축구 동아리에 가입하여 임원까지 맡았다. 한때 <a href="#" class="wiki-link">레알 마드리드</a> 경기를 챙겨보기도 했으나 큰 흥미를 붙이지 못한 것으로 보인다.</li>
+      <li>'누끼'라는 애착인형이 있다. <span class="del">뜻은 여우 토끼(새끼가 아니다).</span></li>
+      <li>세 번의 수능을 치렀으나 정시가 아닌 수시로 학교에 입학했다.</li>
+    </ul>
+  </div>
+
+</body>
+</html>
